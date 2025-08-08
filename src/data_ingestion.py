@@ -28,7 +28,6 @@ class DataIngestion:
 
             blob.download_to_filename(RAW_FILE_PATH)
 
-            print(f"CSV file is sucesfully downloaded to {RAW_FILE_PATH}")
             logger.info(f"CSV file is sucesfully downloaded to {RAW_FILE_PATH}")
 
         except Exception as e:
@@ -43,8 +42,6 @@ class DataIngestion:
 
             train_df.to_csv(TRAIN_FILE_PATH)
             test_df.to_csv(TEST_FILE_PATH)
-
-            print(train_df)
 
             logger.info(f"Train data saved to {TRAIN_FILE_PATH}")
             logger.info(f"Test data saved to {TEST_FILE_PATH}")
