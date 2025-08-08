@@ -22,7 +22,6 @@ class DataProcessor:
         if not os.path.exists(self.processed_dir):
             os.makedirs(self.processed_dir)
 
-
     def preprocess_data(self, df):
         try: 
             logger.info("Starting our Data Processing step")
