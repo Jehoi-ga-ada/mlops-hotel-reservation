@@ -56,11 +56,18 @@ pipeline{
             }
         }
     }
-    
+
     post {
         always {
-            echo 'Archiving logs...'
-            archiveArtifacts artifacts: "${LOG_DIR}/*.log", fingerprint: true
+            echo 'Displaying logs...'
+            sh '''
+            if [ -d "${LOG_DIR}" ]; then
+                echo "=== Contents of ${LOG_DIR} ==="
+                cat ${LOG_DIR}/*.log || echo "No log files found."
+            else
+                echo "Log directory not found."
+            fi
+            '''
         }
     }
 }
