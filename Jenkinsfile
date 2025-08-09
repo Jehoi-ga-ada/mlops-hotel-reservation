@@ -55,12 +55,12 @@ pipeline{
                 }
             }
         }
-
-        post {
-            always {
-                echo 'Archiving logs...'
-                archiveArtifacts artifacts: "${LOG_DIR}/*.log", fingerprint: true
-            }
+    }
+    
+    post {
+        always {
+            echo 'Archiving logs...'
+            archiveArtifacts artifacts: "${LOG_DIR}/*.log", fingerprint: true
         }
     }
 }
