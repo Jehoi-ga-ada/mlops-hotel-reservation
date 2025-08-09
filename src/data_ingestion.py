@@ -6,6 +6,7 @@ from src.logger import get_logger
 from src.custom_exception import CustomException
 from config.paths_config import *
 from utils.common_functions import read_yaml
+from google.api_core.exceptions import NotFound, Forbidden
 
 logger = get_logger(__name__)
 
@@ -29,7 +30,12 @@ class DataIngestion:
             blob.download_to_filename(RAW_FILE_PATH)
 
             logger.info(f"CSV file is sucesfully downloaded to {RAW_FILE_PATH}")
-
+        except NotFound as nf:
+            logger.error(f"Bucket or file not found: {nf}")
+            raise
+        except Forbidden as fb:
+            logger.error(f"Permission denied: {fb}")
+            raise
         except Exception as e:
             logger.error("Error while downloading the csv file")
             raise CustomException("Failed to download csv file", e)
