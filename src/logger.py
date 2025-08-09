@@ -16,4 +16,17 @@ logging.basicConfig(
 def get_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
+
+    if not logger.handlers:
+        # File handler
+        file_handler = logging.FileHandler(LOG_FILE)
+        file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+        # Stream handler (stdout for Jenkins)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+        logger.addHandler(file_handler)
+        logger.addHandler(stream_handler)
+        
     return logger

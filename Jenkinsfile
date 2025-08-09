@@ -56,18 +56,4 @@ pipeline{
             }
         }
     }
-
-    post {
-        always {
-            echo 'Displaying logs...'
-            sh '''
-            if [ -d "${LOG_DIR}" ]; then
-                echo "=== Contents of ${LOG_DIR} ==="
-                cat ${LOG_DIR}/*.log || echo "No log files found."
-            else
-                echo "Log directory not found."
-            fi
-            '''
-        }
-    }
 }
