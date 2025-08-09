@@ -5,6 +5,7 @@ pipeline{
         VENV_DIR = 'venv'
         GCP_PROJECT = 'mlops-udemy-467812'
         GCLOUD_PATH = '/var/jenkins_home/google-cloud-sdk/bin'
+        LOG_DIR = 'logs'
     }
 
     stages{
@@ -52,6 +53,13 @@ pipeline{
                         '''
                     }
                 }
+            }
+        }
+
+        post {
+            always {
+                echo 'Archiving logs...'
+                archiveArtifacts artifacts: "${LOG_DIR}/*.log", fingerprint: true
             }
         }
     }
